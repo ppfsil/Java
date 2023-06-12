@@ -1,50 +1,77 @@
 package Estrutura7;
 
+import java.util.Stack;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
 public class Lista2Exercicio2 {
-
+	
 	public static void main(String[] args) {
-		Scanner menu = new Scanner(System.in);
-		Queue<String> pilha1 = new LinkedList<>();
-		String livro;
-		
-		while (true) {
-			System.out.print("*************Menu**********************\n\n");
-			System.out.print(" Opção 1 - Adicionar Livro na Pilha      \n");
-			System.out.print(" Opção 2 - Listar todos os Livros        \n");
-			System.out.print(" Opção 3 - Mostrar Livro da Pilha        \n");
-			System.out.print(" Opção 0 - Sair                        \n\n");
-			System.out.print("***************************************\n\n");
-			System.out.print("Entre com a opção Desejada:              \n");
-				
-		int opcao = menu.nextInt();
-		
-		if (opcao == 0) {
-			System.out.println("Saindo do Sistema");
-			menu.close();
-			System.exit(0); //faz parar o sistema
-			
-		switch (opcao) {
-		case 1:
-			System.out.print("\nOpção [1] Adicionar Livro na Pilha \n");
-			livro = menu.next();
-			pilha1.offer(livro);
-			System.out.print("\nFila: \n" + livro + "\n Cliente adicionado \n");
-			break;   //faz parar o loop
-		case 2:
-			System.out.print("\nOpção [2] Listar todos os Livros \n");
-			break;
-		case 3:
-			System.out.print("\nOpção [3] Mostrar Livro da Pilha \n");
-			break;
-		}
-		
-		
-		}
-	}
+		Stack<String> pilhaLivros = new Stack<>();
+		Scanner scanner = new Scanner(System.in);
+		int opcao = -1;
+	 
+     while (opcao != 0) {
+        exibirMenu();
+        opcao = scanner.nextInt();
 
-	}
+        switch (opcao) {
+            case 0:
+                System.out.println("Programa finalizado.");
+                break;
+            case 1:
+                System.out.print("Digite o nome do livro: ");
+                String nomeLivro = scanner.next();
+                adicionarLivro(pilhaLivros, nomeLivro);
+                break;
+            case 2:
+                listarLivros(pilhaLivros);
+                break;
+            case 3:
+                retirarLivro(pilhaLivros);
+                break;
+            default:
+                System.out.println("Opção inválida. Tente novamente.");
+                break;
+        }
+     }
+     scanner.close();
+	}  
+
+    private static void exibirMenu() {
+    System.out.println("===== Menu =====");
+    System.out.println("1: Adicionar um novo livro na pilha");
+    System.out.println("2: Listar todos os livros da pilha");
+    System.out.println("3: Retirar um livro da pilha");
+    System.out.println("0: Finalizar o programa");
+    System.out.print("Digite a opção desejada: ");
 }
+
+    private static void adicionarLivro(Stack<String> pilhaLivros, String nomeLivro) {
+    pilhaLivros.push(nomeLivro);
+    System.out.println("Livro adicionado na pilha: " + nomeLivro);
+}
+
+    private static void listarLivros(Stack<String> pilhaLivros) {
+    if (pilhaLivros.isEmpty()) {
+        System.out.println("A pilha está vazia.");
+    } else {
+        System.out.println("Livros na pilha:");
+        for (String livro : pilhaLivros) {
+            System.out.println(livro);
+        }
+    }
+}
+
+    private static void retirarLivro(Stack<String> pilhaLivros) {
+    if (pilhaLivros.isEmpty()) {
+        System.out.println("A pilha está vazia. Não há livros para retirar.");
+    } else {
+        String livroRetirado = pilhaLivros.pop();
+        System.out.println("Livro retirado: " + livroRetirado);
+    }
+}
+}
+
+	

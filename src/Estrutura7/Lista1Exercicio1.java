@@ -1,56 +1,77 @@
 package Estrutura7;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 import java.util.Scanner;
+
 
 public class Lista1Exercicio1 {
 
 	public static void main(String[] args) {
+		Queue<String> filaClientes = new LinkedList<>();
 		Scanner mostrar = new Scanner(System.in);
-		int opcao;
-		Queue<String> fila = new LinkedList<>();
+		int opcao = -1;
 
-		while (true) {
-			System.out.print("*****************Menu***************** \n\n");
-			System.out.print(" Opção 1 - Adicionar Cliente na Fila     \n");
-			System.out.print(" Opção 2 - Listar todos os Clientes      \n");
-			System.out.print(" Opção 3 - Retirar Cliente da Fila       \n");
-			System.out.print(" Opção 0 - Sair                        \n\n");
-			System.out.print("************************************** \n\n");
-			System.out.print("Entre com a opção Desejada: ");
+		while (opcao != 0) {
+			exibirMenu();
 			opcao = mostrar.nextInt();
-			
-			if (opcao == 0) {
-				System.out.print("\nSair");
-				mostrar.close();
-			}
-
-			String nome;
-			opcao = 1;
 
 			switch (opcao) {
+			case 0:
+				System.out.println("Programa Finalizado!");
+				break;
 			case 1:
-				System.out.print("\nOpção [1] Adicionar Cliente na Fila \n");
-				nome = mostrar.next();
-				fila.offer(nome);
-				System.out.print("\nFila: \n" + nome + "\n Cliente adicionado \n");
+				System.out.print("Digite o nome do Cliente: ");
+				String nomeCliente = mostrar.next();
+				adicionarCliente(filaClientes, nomeCliente);
 				break;
 			case 2:
-				System.out.print("\nOpção [2] Todos os Clientes da Fila\n" + fila + "\n");
+				listarCliente(filaClientes);
 				break;
 			case 3:
-				System.out.print("\nOpção [3] O Cliente:" + fila.remove() + " foi Chamado\n");
-				System.out.print("\nLista Atualizada dos Clientes na Fila\n" + fila);
+				chamarCliente(filaClientes);
 				break;
-			case 0:
-				System.out.print("\nOpção [0]Programa Finalizado\n");
+			default:
+				System.out.println("Opção Inválida! Tente novamente.");
 				break;
-		}
+			}
 
 		}
+		mostrar.close();
+	}
 
+	private static void exibirMenu() {
+		System.out.println("====== MENU ======");
+		System.out.println("1 - Adicionar Cliente na Fila");
+		System.out.println("2 - Listar todos os Clientes");
+		System.out.println("3 - Retirar Clientes da Fila");
+		System.out.println("0 - Sair\n");
+		System.out.println("Digite a opção desejada: ");
+	}
+
+	private static void adicionarCliente(Queue<String> FilaClientes, String nomeCliente) {
+		FilaClientes.add(nomeCliente);
+		System.out.println("Cliente adicionado na Fila:" + nomeCliente);
+	}
+
+	private static void listarCliente(Queue<String> filaClientes) {
+	    if (filaClientes.isEmpty()) {
+	        System.out.println("A fila está vazia.");
+	    } else {
+	        System.out.println("Clientes na fila:");
+	        for (String Cliente : filaClientes) {
+	            System.out.println(Cliente);
+	        }
+	    }
+	}
+
+	private static void chamarCliente(Queue<String> filaClientes) {
+		if (filaClientes.isEmpty()) {
+			System.out.println("A fila está vazia. Não há clientes para chamar\n");
+		} else {
+			String clienteChamado = filaClientes.poll();
+			System.out.println("Cliente chamado " + clienteChamado);
+
+		}
 	}
 }

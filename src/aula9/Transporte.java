@@ -5,7 +5,7 @@ public class Transporte {
 private int capacidade;
 
 	
-	public Transporte (int capacidade) {
+	public Transporte (int capacidade) { //Método Construtor
 		super();
 		this.capacidade = capacidade;
 			
@@ -19,8 +19,11 @@ private int capacidade;
 		this.capacidade = capacidade;
 	}
 
-	public void getvisualizar() {
-		System.out.println("Olá!");
+	public void visualizar() {
+		System.out.println("\n\n************************************************************");
+		System.out.println("Dados do Meio de Transporte:");
+		System.out.println("****************************************************************");
+		System.out.println("Capacidade (número de passageiros: " + this.capacidade);
 	}
 
 }
